@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Pinturas</h1>
+    <p>Ejemplo de template de listado de pinturas</p>
+
+    <h2>Lista de pinturas</h2>
+    {% if pinturas %}
+        <ul>
+            {% for pintura in pinturas %}
+                <li>
+                    {{pintura}}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay pinturas disponibles</p>
+    {% endif %}
+    
+</body>
+</html>
