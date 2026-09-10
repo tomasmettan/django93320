@@ -1,12 +1,371 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Artelier | Galería de Arte</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <style>
+        :root {
+            --ink: #292723;
+            --cream: #f3efe7;
+            --paper: #e8e1d5;
+            --sage: #687166;
+            --clay: #927d6d;
+            --muted: #756f67;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .navbar {
+            background-color: rgba(41, 39, 35, 0.98);
+        }
+
+        .brand-mark {
+            letter-spacing: 0.14rem;
+            font-size: 1.15rem;
+        }
+
+        .nav-link {
+            color: #dcd5ca !important;
+            font-family: Arial, sans-serif;
+            font-size: 0.82rem;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #c9b8a4 !important;
+        }
+
+        .hero {
+            min-height: 72vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(90deg, rgba(243,239,231,0.98) 0%, rgba(243,239,231,0.92) 48%, rgba(243,239,231,0.28) 100%),
+                url("https://images.unsplash.com/photo-1577083552431-6e5fd01988f5?auto=format&fit=crop&w=1800&q=85")
+                center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .eyebrow {
+            color: var(--sage);
+            font-family: Arial, sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.25rem;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.2rem, 7vw, 6.5rem);
+            line-height: 0.92;
+            font-weight: 400;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .hero h1 em {
+            color: var(--clay);
+            font-weight: 400;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 540px;
+        }
+
+        .btn-art {
+            background-color: var(--ink);
+            border: 1px solid var(--ink);
+            color: #f3efe7;
+            border-radius: 0;
+            padding: 0.85rem 1.5rem;
+            font-family: Arial, sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.12rem;
+            text-transform: uppercase;
+        }
+
+        .btn-art:hover {
+            background-color: var(--sage);
+            border-color: var(--sage);
+            color: white;
+        }
+
+        .section-label {
+            font-family: Arial, sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            color: var(--clay);
+        }
+
+        .intro {
+            padding: 6rem 0;
+        }
+
+        .intro h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
+        }
+
+        .intro p {
+            color: var(--muted);
+            line-height: 1.9;
+        }
+
+        .feature-card {
+            border: none;
+            border-radius: 0;
+            background-color: var(--paper);
+            height: 100%;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(41, 39, 35, 0.08);
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #d8d1c5;
+            color: var(--ink);
+            font-size: 1.3rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.7rem;
+            font-weight: 400;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        footer {
+            background-color: var(--ink);
+            color: #dcd5ca;
+            padding: 2rem 0;
+        }
+
+        footer small {
+            font-family: Arial, sans-serif;
+            color: #aaa49b;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Bienvenido a mi pagina Django</h1>
-    <p>Esta es mi primera pagina con Django</p>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container py-2">
+            <a class="navbar-brand text-light brand-mark" href="{% url 'home' %}">
+                <i class="bi bi-brush me-2"></i>ARTELIER
+            </a>
+
+            <button
+                class="navbar-toggler border-secondary"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Abrir navegación"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto gap-lg-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'listar_pinturas' %}">Pinturas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Autores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Galerías</a>
+                    </li>
+
+                    {% if user.is_authenticated %}  <!-- Verifica si el usuario está autenticado -->
+                        <li class="nav-item">
+                            <form action="{% url 'cerrar_sesion' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link nav-link">Cerrar sesión</button>
+                            </form>
+                        </li>
+                    {% else %} <!-- Si el usuario no está autenticado, muestra el enlace para cerrar sesión -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'iniciar_sesion' %}">Iniciar sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'registro' %}">Registrarse</a>
+                        </li>
+                    {% endif %} <!-- Fin de la verificación de autenticación -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="eyebrow">Colección · Arte · Historia</span>
+
+                <h1>
+                    El arte<br>
+                    <em>sin fronteras.</em>
+                </h1>
+
+                <p>
+                    Un espacio dedicado a descubrir pinturas, conocer a sus
+                    creadores y recorrer algunas de las galerías más
+                    fascinantes del mundo.
+                </p>
+
+                <a href="{% url 'listar_pinturas' %}" class="btn btn-art mt-3">
+                    Explorar colección
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- INTRO -->
+    <main>
+        <section class="intro">
+            <div class="container">
+                <div class="row align-items-end g-5">
+                    <div class="col-lg-6">
+                        <span class="section-label">Nuestra colección</span>
+                        <h2 class="mt-3">
+                            Historias que viven<br>
+                            en cada pincelada.
+                        </h2>
+                    </div>
+
+                    <div class="col-lg-5 offset-lg-1">
+                        <p class="mb-0">
+                            Desde los grandes maestros hasta artistas que
+                            dejaron una huella menos conocida, ARTELIER reúne
+                            obras y recorridos para acercarte a la historia
+                            del arte de una manera simple y visual.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORIES -->
+        <section class="pb-5">
+            <div class="container">
+                <div class="row g-4">
+
+                    <div class="col-md-4">
+                        <a href="{% url 'listar_pinturas' %}" class="text-decoration-none text-dark">
+                            <article class="feature-card p-4 p-lg-5">
+                                <div class="feature-icon mb-4">
+                                    <i class="bi bi-image"></i>
+                                </div>
+                                <h3>Pinturas</h3>
+                                <p class="mb-4">
+                                    Descubrí obras, estilos, épocas y técnicas
+                                    de diferentes períodos de la historia.
+                                </p>
+                                <span class="section-label">
+                                    Ver obras <i class="bi bi-arrow-right"></i>
+                                </span>
+                            </article>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4">
+                        <a href="{}" class="text-decoration-none text-dark">
+                            <article class="feature-card p-4 p-lg-5">
+                                <div class="feature-icon mb-4">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                <h3>Autores</h3>
+                                <p class="mb-4">
+                                    Conocé las historias, movimientos y obras
+                                    de artistas que transformaron el arte.
+                                </p>
+                                <span class="section-label">
+                                    Ver autores <i class="bi bi-arrow-right"></i>
+                                </span>
+                            </article>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4">
+                        <a href="{}" class="text-decoration-none text-dark">
+                            <article class="feature-card p-4 p-lg-5">
+                                <div class="feature-icon mb-4">
+                                    <i class="bi bi-building"></i>
+                                </div>
+                                <h3>Galerías</h3>
+                                <p class="mb-4">
+                                    Explorá museos y galerías de distintas
+                                    ciudades y descubrí dónde vive el arte.
+                                </p>
+                                <span class="section-label">
+                                    Ver galerías <i class="bi bi-arrow-right"></i>
+                                </span>
+                            </article>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-5">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+            <div class="brand-mark">
+                <i class="bi bi-brush me-2"></i>ARTELIER
+            </div>
+            <small>Una colección para mirar, descubrir y recordar.</small>
+        </div>
+    </footer>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
 </body>
 </html>
